@@ -8,7 +8,7 @@ import { ClockIcon, CopyIcon, EnvelopeIcon, EyeIcon, HeartOutlineIcon, PlusIcon,
 type Filter = 'all' | DisplayStatus
 const TABS: [Filter, string][] = [['all', 'All'], ['pending', 'Pending'], ['accepted', 'Accepted'], ['declined', 'Declined'], ['expired', 'Expired']]
 const card = 'rounded-3xl border border-line bg-white shadow-[0_8px_28px_rgba(112,45,67,0.06)]'
-const cols = 'grid grid-cols-[minmax(210px,2.2fr)_minmax(110px,1fr)_minmax(200px,2fr)_minmax(80px,0.8fr)_200px] gap-4'
+const cols = 'grid grid-cols-[minmax(160px,2fr)_minmax(100px,1fr)_minmax(160px,2fr)_minmax(64px,0.6fr)_auto] gap-4'
 const softBtn = 'btn-soft inline-flex min-h-10 cursor-pointer items-center gap-1.5 rounded-xl border border-line-2 bg-white text-[13px] text-wine'
 const label = 'text-xs font-semibold uppercase tracking-[0.06em] text-muted-2'
 
@@ -104,7 +104,7 @@ export function DashboardView({ name, invites, siteUrl }: { name: string; invite
               </div>
 
               <div className="overflow-x-auto">
-                <div className="min-w-[820px]">
+                <div className="min-w-[800px]">
                   <div className={`${cols} bg-field px-6 py-3 ${label}`}>
                     <span>Recipient</span><span>Status</span><span>Latest activity</span><span>Sent</span><span className="text-right">Actions</span>
                   </div>

@@ -22,11 +22,14 @@
   --font-sans: var(--font-inter), system-ui, sans-serif;
 }
 
-body { margin: 0; background: var(--color-cream); color: var(--color-ink); font-family: var(--font-sans); }
-a { color: var(--color-wine); } a:hover { color: var(--color-rose-deep); }
-button, a, input, textarea { font-family: inherit; }
-button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, summary:focus-visible { outline: 3px solid #E85D75; outline-offset: 2px; }
-input::placeholder, textarea::placeholder { color: #8E8187; }
+/* In a layer so Tailwind utilities (e.g. text-white on links) win */
+@layer base {
+  body { margin: 0; background: var(--color-cream); color: var(--color-ink); font-family: var(--font-sans); }
+  a { color: var(--color-wine); } a:hover { color: var(--color-rose-deep); }
+  button, a, input, textarea { font-family: inherit; }
+  button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, summary:focus-visible { outline: 3px solid #E85D75; outline-offset: 2px; }
+  input::placeholder, textarea::placeholder { color: #8E8187; }
+}
 
 .btn-primary { transition: background .18s ease, transform .18s ease; }
 .btn-primary:hover { background: #B33A56 !important; color: #fff !important; transform: translateY(-1px); }
