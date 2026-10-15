@@ -41,7 +41,8 @@ export function RecipientFlow({ invite, slug, preview, expired, canChange }: Pro
     setFailed(null)
     try {
       const res = await fetch(`/api/invites/${slug}/respond`, {
-        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ answer }),
+        // keepalive: the answer still arrives if they close the tab right after tapping
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ answer }), keepalive: true,
       })
       if (!res.ok) throw new Error(String(res.status))
     } catch { setFailed(answer) }

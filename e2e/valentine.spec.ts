@@ -47,7 +47,7 @@ test('sender creates invites; recipient declines one and accepts another', async
   await recipient.getByRole('button', { name: 'Open your letter' }).click()
   await recipient.getByRole('button', { name: 'No, thank you' }).click()
   await expect(recipient.getByText('Okay! Just double-checking')).toBeVisible()
-  await recipient.getByRole('button', { name: 'Yes, I’m sure' }).click()
+  await Promise.all([recipient.waitForResponse('**/respond'), recipient.getByRole('button', { name: 'Yes, I’m sure' }).click()])
   await expect(recipient.getByText('Two Nos?')).toBeVisible()
   await recipient.reload()
   await expect(recipient.getByText('Take care, Jules')).toBeVisible()
@@ -66,7 +66,7 @@ test('sender creates invites; recipient declines one and accepts another', async
 
   await recipient.goto(acceptLink)
   await recipient.getByRole('button', { name: 'Open your letter' }).click()
-  await recipient.getByRole('button', { name: /Yes, I’d love to/ }).click()
+  await Promise.all([recipient.waitForResponse('**/respond'), recipient.getByRole('button', { name: /Yes, I’d love to/ }).click()])
   await expect(recipient.getByText('Yay! It’s a date!')).toBeVisible()
 
   await page.reload()
