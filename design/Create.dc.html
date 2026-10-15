@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Create invitation</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FFF9F2}
+a{color:#702D43}a:hover{color:#C94462}
+button,a,input,textarea{font-family:inherit}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #E85D75;outline-offset:2px}
+input::placeholder,textarea::placeholder{color:#8E8187}
+.btn-primary{transition:background .18s ease, transform .18s ease}
+.btn-primary:hover{background:#B33A56 !important;color:#FFFFFF !important;transform:translateY(-1px)}
+.btn-soft{transition:background .18s ease, border-color .18s ease}
+.btn-soft:hover{background:#FFF0F3 !important;border-color:#E85D75 !important}
+.theme-opt{transition:border-color .18s ease, box-shadow .18s ease, transform .18s ease}
+.theme-opt:hover{transform:translateY(-2px)}
+.preview-card{transition:background .35s ease}
+@keyframes popIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.pop-in{animation:popIn .4s ease both}
+@media (prefers-reduced-motion: reduce){.pop-in{animation:none}.theme-opt:hover{transform:none}}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #FFF9F2; font-family: Inter, system-ui, sans-serif; color: #352B30; font-size: 15px; line-height: 1.5">
+
+<header style="border-bottom: 1px solid #F1E3E6; background: #FFFCF8">
+<div style="max-width: 1240px; margin: 0 auto; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap">
+<a href="Main.dc.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none">
+<svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true"><rect x="3" y="8" width="30" height="21" rx="5" fill="#FFF0F3" stroke="#702D43" stroke-width="1.6"/><path d="M4.5 10.5L18 20l13.5-9.5" fill="none" stroke="#702D43" stroke-width="1.6" stroke-linejoin="round"/><circle cx="18" cy="21" r="6.5" fill="#E85D75"/><path d="M18 24.6c-2-1.5-3.4-2.7-3.4-4.2 0-1.1.8-1.9 1.8-1.9.7 0 1.2.4 1.6.9.4-.5.9-.9 1.6-.9 1 0 1.8.8 1.8 1.9 0 1.5-1.4 2.7-3.4 4.2z" fill="#FFFFFF"/></svg>
+<span style="font-family: 'Playfair Display', Georgia, serif; font-size: 20px; font-weight: 600; color: #702D43">Will You Be My Valentine?</span>
+</a>
+<span style="display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 999px; background: #E9DDF8; color: #47335F; font-size: 13px; font-weight: 500">Prototype · sample data</span>
+</div>
+</header>
+
+<main style="max-width: 1240px; margin: 0 auto; padding: 32px 24px 72px; display: flex; flex-direction: column; gap: 24px">
+<a href="Main.dc.html" style="align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; min-height: 40px; color: #702D43; font-weight: 500; text-decoration: none">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+Back to invitations</a>
+
+<div style="display: flex; flex-direction: column; gap: 6px">
+<h1 style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 40px; line-height: 1.15; color: #702D43">Write a Valentine</h1>
+<p style="margin: 0; color: #5E5157">A name and a few honest words are all it takes. Everything else is optional.</p>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start">
+
+<section aria-label="Invitation details" style="flex: 999 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+
+<sc-if value="{{showForm}}" hint-placeholder-val="{{ true }}">
+<form onSubmit="{{onSubmit}}" style="background: #FFFFFF; border: 1px solid #F1E3E6; border-radius: 24px; box-shadow: 0 8px 28px rgba(112, 45, 67, 0.06); padding: 28px; display: flex; flex-direction: column; gap: 22px">
+
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="f-recipient" style="font-weight: 600; color: #352B30">Who is it for?</label>
+<input id="f-recipient" type="text" value="{{recipient}}" onChange="{{onRecipient}}" placeholder="Their first name" maxlength="40" aria-invalid="{{errAttr}}" aria-describedby="f-recipient-err" style="min-height: 48px; padding: 0 14px; border-radius: 14px; border: 1.5px solid {{recipientBorder}}; background: #FFFAF6; font-size: 16px; color: #352B30">
+<sc-if value="{{error}}" hint-placeholder-val="{{ false }}">
+<span id="f-recipient-err" style="font-size: 13px; color: #A3324E">Add their name so the card can greet them.</span>
+</sc-if>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between; align-items: baseline">
+<label for="f-message" style="font-weight: 600; color: #352B30">Your message</label>
+<span style="font-size: 13px; color: #6B5F65">{{msgCount}} / 280</span>
+</div>
+<textarea id="f-message" rows="4" maxlength="280" value="{{message}}" onChange="{{onMessage}}" placeholder="Say it the way only you would." style="padding: 12px 14px; border-radius: 14px; border: 1.5px solid #EBD5DA; background: #FFFAF6; font-size: 16px; line-height: 1.55; color: #352B30; resize: vertical"></textarea>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="f-plan" style="font-weight: 600; color: #352B30">Date plan <span style="font-weight: 400; color: #6B5F65">(optional)</span></label>
+<input id="f-plan" type="text" value="{{plan}}" onChange="{{onPlan}}" placeholder="e.g. Dinner, Feb 14, 7 PM" style="min-height: 48px; padding: 0 14px; border-radius: 14px; border: 1.5px solid #EBD5DA; background: #FFFAF6; font-size: 16px; color: #352B30">
+</div>
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="f-sender" style="font-weight: 600; color: #352B30">Sign it as <span style="font-weight: 400; color: #6B5F65">(optional)</span></label>
+<input id="f-sender" type="text" value="{{sender}}" onChange="{{onSender}}" placeholder="Leave blank to stay a mystery" style="min-height: 48px; padding: 0 14px; border-radius: 14px; border: 1.5px solid #EBD5DA; background: #FFFAF6; font-size: 16px; color: #352B30">
+</div>
+</div>
+
+<fieldset style="border: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px">
+<legend style="font-weight: 600; color: #352B30; padding: 0; margin-bottom: 10px">Card theme</legend>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px">
+<sc-for list="{{themes}}" as="t" hint-placeholder-count="3">
+<button type="button" class="theme-opt" aria-pressed="{{t.pressed}}" onClick="{{t.pick}}" style="text-align: left; padding: 12px; border-radius: 18px; border: 2px solid {{t.border}}; background: #FFFFFF; cursor: pointer; display: flex; flex-direction: column; gap: 10px; box-shadow: {{t.shadow}}">
+<span aria-hidden="true" style="height: 64px; border-radius: 12px; background: {{t.bg}}; position: relative; overflow: hidden; display: block">
+<span style="position: absolute; left: 14px; top: 14px; width: 46px; height: 6px; border-radius: 3px; background: {{t.ink}}; opacity: 0.75"></span>
+<span style="position: absolute; left: 14px; top: 26px; width: 70px; height: 4px; border-radius: 2px; background: {{t.ink}}; opacity: 0.3"></span>
+<span style="position: absolute; left: 14px; top: 36px; width: 56px; height: 4px; border-radius: 2px; background: {{t.ink}}; opacity: 0.3"></span>
+<span style="position: absolute; right: -10px; bottom: -10px; width: 44px; height: 44px; border-radius: 50%; background: {{t.decor}}"></span>
+<span style="position: absolute; right: 12px; top: 12px; width: 14px; height: 14px; border-radius: 50%; background: {{t.accent}}"></span>
+</span>
+<span style="display: flex; flex-direction: column">
+<span style="font-weight: 600; color: #352B30; font-size: 14px">{{t.name}}</span>
+<span style="font-size: 12px; color: #6B5F65">{{t.desc}}</span>
+</span>
+</button>
+</sc-for>
+</div>
+</fieldset>
+
+<button type="submit" class="btn-primary" style="min-height: 56px; border-radius: 16px; border: none; background: #C94462; color: #FFFFFF; font-size: 17px; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 8px 20px rgba(201, 68, 98, 0.25)">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M4 12l16-8-6 16-2.5-6.5z"/></svg>
+Create Invitation</button>
+</form>
+</sc-if>
+
+<sc-if value="{{created}}" hint-placeholder-val="{{ false }}">
+<div class="pop-in" role="status" style="background: #FFFFFF; border: 1px solid #F1E3E6; border-radius: 24px; box-shadow: 0 8px 28px rgba(112, 45, 67, 0.06); padding: 32px 28px; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; align-items: center; gap: 14px">
+<span style="width: 52px; height: 52px; border-radius: 16px; background: #E4F0E8; display: inline-flex; align-items: center; justify-content: center"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#2E5A43" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+<div style="display: flex; flex-direction: column">
+<h2 style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-size: 26px; font-weight: 600; color: #702D43">Your letter for {{recipientDisplay}} is sealed</h2>
+<span style="color: #5E5157">Send the link in any chat — it opens best on a phone.</span>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="new-link" style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #6B5F65">Shareable link</label>
+<div style="display: flex; gap: 8px; flex-wrap: wrap">
+<input id="new-link" readonly value="{{link}}" style="flex: 1 1 260px; min-width: 0; min-height: 48px; padding: 0 14px; border-radius: 14px; border: 1.5px solid #EBD5DA; background: #FFFAF6; color: #352B30; font-size: 15px">
+<button type="button" class="btn-primary" onClick="{{copy}}" style="min-height: 48px; padding: 0 20px; border-radius: 14px; border: none; background: #C94462; color: #FFFFFF; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 8px">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>{{copyLabel}}</button>
+</div>
+<span style="font-size: 13px; color: #6B5F65">Simulated placeholder link. In production this would be a unique, hosted URL that records the reply and syncs it to your dashboard.</span>
+</div>
+
+<div style="display: flex; gap: 12px; flex-wrap: wrap">
+<a href="Recipient.dc.html" class="btn-soft" style="flex: 1 1 200px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; border-radius: 14px; border: 1.5px solid #EBD5DA; background: #FFFFFF; color: #702D43; font-weight: 600; text-decoration: none">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg>
+Preview as {{recipientDisplay}}</a>
+<a href="Main.dc.html" class="btn-soft" style="flex: 1 1 200px; display: inline-flex; align-items: center; justify-content: center; min-height: 48px; border-radius: 14px; border: 1.5px solid #EBD5DA; background: #FFFFFF; color: #702D43; font-weight: 600; text-decoration: none">Back to dashboard</a>
+</div>
+<button type="button" onClick="{{reset}}" style="align-self: flex-start; min-height: 40px; padding: 0 4px; border: none; background: none; color: #702D43; font-weight: 500; text-decoration: underline; cursor: pointer">Write another invitation</button>
+</div>
+</sc-if>
+</section>
+
+<aside aria-label="Live preview" style="flex: 1 1 400px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: center; justify-content: space-between">
+<span style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #6B5F65">Live preview</span>
+<span style="font-size: 13px; color: #6B5F65">What {{recipientDisplay}} will see</span>
+</div>
+<div style="border-radius: 36px; background: #EFE3E6; padding: 14px">
+<div class="preview-card" style="border-radius: 26px; background: {{th.bg}}; padding: 28px 22px; position: relative; overflow: hidden; display: flex; flex-direction: column; gap: 16px; min-height: 520px">
+<svg width="110" height="110" viewBox="0 0 110 110" aria-hidden="true" style="position: absolute; right: -18px; top: -18px"><circle cx="55" cy="55" r="16" fill="{{th.decor}}"/><circle cx="55" cy="28" r="15" fill="{{th.decor}}"/><circle cx="82" cy="55" r="15" fill="{{th.decor}}"/><circle cx="55" cy="82" r="15" fill="{{th.decor}}"/><circle cx="28" cy="55" r="15" fill="{{th.decor}}"/><circle cx="55" cy="55" r="7" fill="{{th.accent}}"/></svg>
+<svg width="28" height="28" viewBox="0 0 24 24" aria-hidden="true" style="position: absolute; left: 22px; bottom: 26px; opacity: 0.5"><path d="M12 20.5C7 16.8 3 13.6 3 9.4 3 6.6 5.1 4.5 7.8 4.5c1.7 0 3.2.9 4.2 2.3 1-1.4 2.5-2.3 4.2-2.3 2.7 0 4.8 2.1 4.8 4.9 0 4.2-4 7.4-9 11.1z" fill="{{th.decor}}"/></svg>
+<div style="background: #FFFFFF; border-radius: 22px; padding: 24px 22px; box-shadow: 0 10px 30px rgba(112, 45, 67, 0.10); display: flex; flex-direction: column; gap: 14px; position: relative; margin-top: 36px">
+<span style="font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-size: 19px; color: {{th.ink}}">Dear {{recipientDisplay}},</span>
+<span style="font-family: 'Playfair Display', Georgia, serif; font-size: 30px; line-height: 1.15; font-weight: 600; color: {{th.ink}}">Will you be my Valentine?</span>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #4A3D43; white-space: pre-line">{{messageDisplay}}</p>
+<sc-if value="{{hasPlan}}" hint-placeholder-val="{{ true }}">
+<span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 12px; background: {{th.chip}}; color: {{th.ink}}; font-size: 14px; font-weight: 500">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>{{plan}}</span>
+</sc-if>
+<span style="font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-size: 17px; color: {{th.ink}}">{{signoff}}</span>
+<div aria-hidden="true" style="display: flex; flex-direction: column; gap: 10px; margin-top: 4px">
+<span style="min-height: 48px; border-radius: 14px; background: #C94462; color: #FFFFFF; font-weight: 600; display: flex; align-items: center; justify-content: center">Yes, I’d love to! 💗</span>
+<span style="min-height: 48px; border-radius: 14px; border: 1.5px solid {{th.ink}}; color: {{th.ink}}; font-weight: 600; display: flex; align-items: center; justify-content: center; box-sizing: border-box">No, thank you</span>
+</div>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1100}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = {
+      recipient: 'Mika',
+      message: 'Every coffee run is better with you. I’d love to spend Valentine’s Day with you.',
+      plan: 'Dinner at Toyo Eatery, Feb 14, 7 PM',
+      sender: 'Sam',
+      theme: 'blush',
+      created: false,
+      error: false,
+      copied: false
+    };
+  }
+  componentWillUnmount() { clearTimeout(this._t); }
+  renderVals() {
+    const THEMES = [
+      { id: 'blush', name: 'Blush letter', desc: 'Soft pink, classic', bg: '#FFF0F3', accent: '#E85D75', decor: '#F9CED8', ink: '#702D43', chip: '#FFE3E9' },
+      { id: 'lavender', name: 'Lavender dream', desc: 'Calm and dreamy', bg: '#F3ECFB', accent: '#9C7CC6', decor: '#E9DDF8', ink: '#4F2F5C', chip: '#EEE4F9' },
+      { id: 'peach', name: 'Peach garden', desc: 'Warm and sunny', bg: '#FFF4EC', accent: '#E8865D', decor: '#FFD8C2', ink: '#6A3226', chip: '#FFE6D6' }
+    ];
+    const s = this.state;
+    const th = THEMES.find((t) => t.id === s.theme) || THEMES[0];
+    const name = s.recipient.trim();
+    const slug = (name || 'valentine').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'valentine';
+    const field = (k) => (e) => this.setState({ [k]: e.target.value, error: k === 'recipient' ? false : s.error });
+    return {
+      recipient: s.recipient, message: s.message, plan: s.plan, sender: s.sender,
+      onRecipient: field('recipient'), onMessage: field('message'), onPlan: field('plan'), onSender: field('sender'),
+      msgCount: s.message.length,
+      recipientDisplay: name || 'your Valentine',
+      messageDisplay: s.message.trim() || 'Your message will appear here.',
+      hasPlan: s.plan.trim().length > 0,
+      signoff: s.sender.trim() ? 'With love, ' + s.sender.trim() : 'With love, your secret admirer',
+      error: s.error,
+      errAttr: s.error ? 'true' : 'false',
+      recipientBorder: s.error ? '#A3324E' : '#EBD5DA',
+      th: th,
+      themes: THEMES.map((t) => {
+        const on = t.id === s.theme;
+        return Object.assign({}, t, { pressed: on ? 'true' : 'false', border: on ? '#E85D75' : '#F1E3E6', shadow: on ? '0 6px 18px rgba(232, 93, 117, 0.18)' : 'none', pick: () => this.setState({ theme: t.id }) });
+      }),
+      showForm: !s.created,
+      created: s.created,
+      link: 'https://bemyvalentine.app/i/' + slug + '-7f3k',
+      copyLabel: s.copied ? 'Copied!' : 'Copy link',
+      onSubmit: (e) => {
+        if (e && e.preventDefault) e.preventDefault();
+        if (!name) { this.setState({ error: true }); return; }
+        this.setState({ created: true });
+      },
+      copy: () => {
+        try { if (navigator.clipboard) navigator.clipboard.writeText('https://bemyvalentine.app/i/' + slug + '-7f3k').catch(function () {}); } catch (err) {}
+        this.setState({ copied: true });
+        clearTimeout(this._t);
+        this._t = setTimeout(() => this.setState({ copied: false }), 1800);
+      },
+      reset: () => this.setState({ created: false, copied: false, recipient: '', message: '', plan: '', error: false })
+    };
+  }
+}
+</script>
+</body>
+</html>

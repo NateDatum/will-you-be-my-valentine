@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Valentine dashboard</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FFF9F2}
+a{color:#702D43}a:hover{color:#C94462}
+button,a,input{font-family:inherit}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #E85D75;outline-offset:2px}
+.btn-primary{transition:background .18s ease, transform .18s ease}
+.btn-primary:hover{background:#B33A56 !important;color:#FFFFFF !important;transform:translateY(-1px)}
+.btn-soft{transition:background .18s ease, border-color .18s ease}
+.btn-soft:hover{background:#FFF0F3 !important;border-color:#E85D75 !important}
+.row{transition:background .15s ease}
+.row:hover{background:#FFF6F8 !important}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #FFF9F2; font-family: Inter, system-ui, sans-serif; color: #352B30; font-size: 15px; line-height: 1.5">
+
+<header style="border-bottom: 1px solid #F1E3E6; background: #FFFCF8">
+<div style="max-width: 1240px; margin: 0 auto; padding: 16px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap">
+<a href="Main.dc.html" style="display: flex; align-items: center; gap: 12px; text-decoration: none">
+<svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true"><rect x="3" y="8" width="30" height="21" rx="5" fill="#FFF0F3" stroke="#702D43" stroke-width="1.6"/><path d="M4.5 10.5L18 20l13.5-9.5" fill="none" stroke="#702D43" stroke-width="1.6" stroke-linejoin="round"/><circle cx="18" cy="21" r="6.5" fill="#E85D75"/><path d="M18 24.6c-2-1.5-3.4-2.7-3.4-4.2 0-1.1.8-1.9 1.8-1.9.7 0 1.2.4 1.6.9.4-.5.9-.9 1.6-.9 1 0 1.8.8 1.8 1.9 0 1.5-1.4 2.7-3.4 4.2z" fill="#FFFFFF"/></svg>
+<span style="font-family: 'Playfair Display', Georgia, serif; font-size: 20px; font-weight: 600; color: #702D43">Will You Be My Valentine?</span>
+</a>
+<div style="display: flex; align-items: center; gap: 12px">
+<span style="display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 999px; background: #E9DDF8; color: #47335F; font-size: 13px; font-weight: 500">
+<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>
+Prototype · sample data</span>
+<span aria-label="Signed in as Sam" role="img" style="width: 36px; height: 36px; border-radius: 50%; background: #FFD8C2; color: #6A3A1F; display: inline-flex; align-items: center; justify-content: center; font-weight: 600">S</span>
+</div>
+</div>
+</header>
+
+<main style="max-width: 1240px; margin: 0 auto; padding: 40px 24px 72px; display: flex; flex-direction: column; gap: 28px">
+
+<div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<span style="font-size: 14px; font-weight: 500; color: #9A4A60; letter-spacing: 0.02em">Hi Sam</span>
+<h1 style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 40px; line-height: 1.15; color: #702D43">Your Valentine invitations</h1>
+<p style="margin: 0; color: #5E5157; max-width: 520px">See who has opened your letters and how they replied.</p>
+</div>
+<a href="Create.dc.html" class="btn-primary" style="display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 22px; border-radius: 14px; background: #C94462; color: #FFFFFF; font-weight: 600; text-decoration: none; box-shadow: 0 6px 16px rgba(201, 68, 98, 0.22)">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+New invitation</a>
+</div>
+
+<div style="display: flex; align-items: flex-start; gap: 12px; padding: 14px 18px; border-radius: 16px; background: #FFF0F3; border: 1px dashed #EBB3C0; color: #5A3A45; font-size: 14px">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#9A4A60" stroke-width="2" stroke-linecap="round" style="flex: none; margin-top: 2px" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>
+<span><strong style="font-weight: 600">This is a prototype.</strong> Invitation links, saved responses and cross-device response sync are simulated with sample data. Production sharing needs a backend for link hosting, persistent storage and real-time status updates.</span>
+</div>
+
+<sc-if value="{{isEmpty}}" hint-placeholder-val="{{ false }}">
+<section style="background: #FFFFFF; border-radius: 24px; border: 1px solid #F1E3E6; box-shadow: 0 8px 28px rgba(112, 45, 67, 0.06); padding: 64px 24px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px">
+<svg width="160" height="120" viewBox="0 0 160 120" aria-hidden="true"><ellipse cx="80" cy="108" rx="58" ry="7" fill="#F6E7EA"/><rect x="26" y="30" width="108" height="72" rx="12" fill="#FFF0F3" stroke="#702D43" stroke-width="2"/><path d="M28 34l52 38 52-38" fill="none" stroke="#702D43" stroke-width="2" stroke-linejoin="round"/><circle cx="80" cy="70" r="13" fill="#E85D75"/><path d="M80 77.5c-4-3-6.8-5.4-6.8-8.3 0-2.1 1.6-3.7 3.6-3.7 1.4 0 2.5.8 3.2 1.8.7-1 1.8-1.8 3.2-1.8 2 0 3.6 1.6 3.6 3.7 0 2.9-2.8 5.3-6.8 8.3z" fill="#FFFFFF"/><path d="M124 18c-2.4-1.8-4-3.2-4-5 0-1.2 1-2.2 2.2-2.2.8 0 1.4.4 1.8 1 .4-.6 1-1 1.8-1 1.2 0 2.2 1 2.2 2.2 0 1.8-1.6 3.2-4 5z" fill="#E9A3B3"/><path d="M36 20c-1.8-1.3-3-2.4-3-3.7 0-.9.7-1.6 1.6-1.6.6 0 1.1.3 1.4.8.3-.5.8-.8 1.4-.8.9 0 1.6.7 1.6 1.6 0 1.3-1.2 2.4-3 3.7z" fill="#C9B3E6"/></svg>
+<h2 style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 28px; color: #702D43">No invitations yet</h2>
+<p style="margin: 0; max-width: 420px; color: #5E5157">Your first letter is waiting to be written. Add a name, a few heartfelt words, and we’ll wrap it up in a card worth opening.</p>
+<a href="Create.dc.html" class="btn-primary" style="margin-top: 8px; display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 22px; border-radius: 14px; background: #C94462; color: #FFFFFF; font-weight: 600; text-decoration: none">Write your first invitation</a>
+</section>
+</sc-if>
+
+<sc-if value="{{hasData}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 28px">
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px">
+<div style="background: #FFFFFF; border: 1px solid #F1E3E6; border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 4px 16px rgba(112, 45, 67, 0.05)">
+<div style="display: flex; align-items: center; justify-content: space-between">
+<span style="font-size: 14px; font-weight: 500; color: #5E5157">Total sent</span>
+<span style="width: 36px; height: 36px; border-radius: 12px; background: #E9DDF8; display: inline-flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#47335F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg></span>
+</div>
+<span style="font-family: 'Playfair Display', Georgia, serif; font-size: 40px; font-weight: 600; line-height: 1; color: #352B30">{{counts.total}}</span>
+<span style="font-size: 13px; color: #6B5F65">{{counts.expiredNote}}</span>
+</div>
+<div style="background: #FFFFFF; border: 1px solid #F1E3E6; border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 4px 16px rgba(112, 45, 67, 0.05)">
+<div style="display: flex; align-items: center; justify-content: space-between">
+<span style="font-size: 14px; font-weight: 500; color: #5E5157">Pending</span>
+<span style="width: 36px; height: 36px; border-radius: 12px; background: #FFF1DB; display: inline-flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7E5310" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+</div>
+<span style="font-family: 'Playfair Display', Georgia, serif; font-size: 40px; font-weight: 600; line-height: 1; color: #352B30">{{counts.pending}}</span>
+<span style="font-size: 13px; color: #6B5F65">Waiting on a reply</span>
+</div>
+<div style="background: #FFFFFF; border: 1px solid #F1E3E6; border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 4px 16px rgba(112, 45, 67, 0.05)">
+<div style="display: flex; align-items: center; justify-content: space-between">
+<span style="font-size: 14px; font-weight: 500; color: #5E5157">Accepted</span>
+<span style="width: 36px; height: 36px; border-radius: 12px; background: #E4F0E8; display: inline-flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2E5A43" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5C7 16.8 3 13.6 3 9.4 3 6.6 5.1 4.5 7.8 4.5c1.7 0 3.2.9 4.2 2.3 1-1.4 2.5-2.3 4.2-2.3 2.7 0 4.8 2.1 4.8 4.9 0 4.2-4 7.4-9 11.1z"/></svg></span>
+</div>
+<span style="font-family: 'Playfair Display', Georgia, serif; font-size: 40px; font-weight: 600; line-height: 1; color: #352B30">{{counts.accepted}}</span>
+<span style="font-size: 13px; color: #6B5F65">It’s a date</span>
+</div>
+<div style="background: #FFFFFF; border: 1px solid #F1E3E6; border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 4px 16px rgba(112, 45, 67, 0.05)">
+<div style="display: flex; align-items: center; justify-content: space-between">
+<span style="font-size: 14px; font-weight: 500; color: #5E5157">Declined</span>
+<span style="width: 36px; height: 36px; border-radius: 12px; background: #F7E7EB; display: inline-flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7A3F52" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></svg></span>
+</div>
+<span style="font-family: 'Playfair Display', Georgia, serif; font-size: 40px; font-weight: 600; line-height: 1; color: #352B30">{{counts.declined}}</span>
+<span style="font-size: 13px; color: #6B5F65">Answer respected</span>
+</div>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+
+<section aria-labelledby="inv-title" style="flex: 999 1 560px; min-width: 0; background: #FFFFFF; border: 1px solid #F1E3E6; border-radius: 24px; box-shadow: 0 8px 28px rgba(112, 45, 67, 0.06); overflow: hidden">
+<div style="padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; border-bottom: 1px solid #F4E8EB">
+<h2 id="inv-title" style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 22px; color: #702D43">Invitations</h2>
+<div role="group" aria-label="Filter by status" style="display: flex; gap: 6px; flex-wrap: wrap">
+<sc-for list="{{tabs}}" as="tab" hint-placeholder-count="5">
+<button type="button" aria-pressed="{{tab.pressed}}" onClick="{{tab.pick}}" style="min-height: 36px; padding: 0 14px; border-radius: 999px; border: 1px solid {{tab.border}}; background: {{tab.bg}}; color: {{tab.fg}}; font-size: 13px; font-weight: 500; cursor: pointer">{{tab.label}} · {{tab.count}}</button>
+</sc-for>
+</div>
+</div>
+
+<div style="overflow-x: auto">
+<div style="min-width: 820px">
+<div style="display: grid; grid-template-columns: minmax(210px, 2.2fr) minmax(110px, 1fr) minmax(200px, 2fr) minmax(80px, 0.8fr) 200px; gap: 16px; padding: 12px 24px; background: #FFFAF6; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #6B5F65">
+<span>Recipient</span><span>Status</span><span>Latest activity</span><span>Sent</span><span style="text-align: right">Actions</span>
+</div>
+<sc-for list="{{rows}}" as="row" hint-placeholder-count="6">
+<div class="row" style="display: grid; grid-template-columns: minmax(210px, 2.2fr) minmax(110px, 1fr) minmax(200px, 2fr) minmax(80px, 0.8fr) 200px; gap: 16px; padding: 14px 24px; align-items: center; border-top: 1px solid #F4E8EB; background: {{row.rowBg}}">
+<div style="display: flex; align-items: center; gap: 12px; min-width: 0">
+<span aria-hidden="true" style="flex: none; width: 40px; height: 40px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-weight: 600; background: {{row.avBg}}; color: {{row.avFg}}">{{row.initial}}</span>
+<div style="display: flex; flex-direction: column; min-width: 0">
+<span style="font-weight: 600; color: #352B30">{{row.name}}</span>
+<span style="font-size: 13px; color: #6B5F65">{{row.themeName}}</span>
+</div>
+</div>
+<span style="justify-self: start; display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 999px; font-size: 13px; font-weight: 600; background: {{row.pillBg}}; color: {{row.pillFg}}"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 50%; background: {{row.pillDot}}"></span>{{row.pillLabel}}</span>
+<span style="font-size: 14px; color: #5E5157">{{row.activity}}</span>
+<span style="font-size: 14px; color: #5E5157">{{row.sent}}</span>
+<div style="display: flex; justify-content: flex-end; gap: 8px">
+<button type="button" class="btn-soft" onClick="{{row.copy}}" aria-label="Copy invitation link for {{row.name}}" style="min-height: 40px; padding: 0 12px; border-radius: 12px; border: 1px solid #EBD5DA; background: #FFFFFF; color: #702D43; font-size: 13px; font-weight: 500; cursor: pointer; display: inline-flex; align-items: center; gap: 6px">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>{{row.copyLabel}}</button>
+<button type="button" class="btn-soft" onClick="{{row.select}}" aria-label="View details for {{row.name}}" style="min-height: 40px; padding: 0 14px; border-radius: 12px; border: 1px solid #EBD5DA; background: #FFFFFF; color: #702D43; font-size: 13px; font-weight: 600; cursor: pointer">Details</button>
+</div>
+</div>
+</sc-for>
+<sc-if value="{{noRows}}" hint-placeholder-val="{{ false }}">
+<div style="padding: 40px 24px; text-align: center; color: #6B5F65; border-top: 1px solid #F4E8EB">No invitations with this status yet.</div>
+</sc-if>
+</div>
+</div>
+</section>
+
+<aside aria-label="Invitation details" style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<sc-if value="{{hasSel}}" hint-placeholder-val="{{ true }}">
+<div style="background: #FFFFFF; border: 1px solid #F1E3E6; border-radius: 24px; box-shadow: 0 8px 28px rgba(112, 45, 67, 0.06); padding: 24px; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px">
+<div style="display: flex; align-items: center; gap: 14px">
+<span aria-hidden="true" style="width: 52px; height: 52px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-family: 'Playfair Display', Georgia, serif; font-size: 22px; font-weight: 600; background: {{sel.avBg}}; color: {{sel.avFg}}">{{sel.initial}}</span>
+<div style="display: flex; flex-direction: column; gap: 4px">
+<h3 style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-size: 24px; font-weight: 600; color: #702D43">{{sel.name}}</h3>
+<span style="justify-self: start; align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 999px; font-size: 12px; font-weight: 600; background: {{sel.pillBg}}; color: {{sel.pillFg}}"><span aria-hidden="true" style="width: 7px; height: 7px; border-radius: 50%; background: {{sel.pillDot}}"></span>{{sel.pillLabel}}</span>
+</div>
+</div>
+<button type="button" class="btn-soft" onClick="{{closeSel}}" aria-label="Close details" style="width: 40px; height: 40px; border-radius: 12px; border: 1px solid #EBD5DA; background: #FFFFFF; color: #702D43; cursor: pointer; display: inline-flex; align-items: center; justify-content: center"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+</div>
+
+<div style="padding: 16px; border-radius: 16px; background: {{sel.pillBg}}; display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: {{sel.pillFg}}">Their response</span>
+<span style="font-weight: 600; color: #352B30">{{sel.response}}</span>
+<span style="font-size: 14px; color: #5E5157">{{sel.responseDetail}}</span>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #6B5F65">Your message</span>
+<p style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-size: 17px; line-height: 1.55; color: #4A3540">“{{sel.message}}”</p>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 12px; color: #6B5F65">Date plan</span><span style="font-size: 14px; font-weight: 500">{{sel.plan}}</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 12px; color: #6B5F65">Sent</span><span style="font-size: 14px; font-weight: 500">{{sel.sentLong}}</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 12px; color: #6B5F65">Theme</span><span style="font-size: 14px; font-weight: 500">{{sel.themeName}}</span></div>
+<div style="display: flex; flex-direction: column; gap: 2px"><span style="font-size: 12px; color: #6B5F65">Link expires</span><span style="font-size: 14px; font-weight: 500">{{sel.expires}}</span></div>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px">
+<label for="sel-link" style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #6B5F65">Shareable link</label>
+<div style="display: flex; gap: 8px">
+<input id="sel-link" readonly value="{{sel.link}}" style="flex: 1; min-width: 0; min-height: 44px; padding: 0 12px; border-radius: 12px; border: 1px solid #EBD5DA; background: #FFFAF6; color: #352B30; font-size: 14px">
+<button type="button" class="btn-primary" onClick="{{sel.copy}}" style="min-height: 44px; padding: 0 16px; border-radius: 12px; border: none; background: #C94462; color: #FFFFFF; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 6px">
+<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>{{sel.copyLabel}}</button>
+</div>
+<span style="font-size: 12px; color: #6B5F65">Simulated link — it won’t open outside this prototype.</span>
+</div>
+
+<a href="Recipient.dc.html" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; border-radius: 12px; border: 1px solid #EBD5DA; color: #702D43; font-weight: 600; text-decoration: none">
+<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></svg>
+Preview as recipient</a>
+</div>
+</sc-if>
+<sc-if value="{{noSel}}" hint-placeholder-val="{{ false }}">
+<div style="background: #FFFFFF; border: 1px dashed #EBD5DA; border-radius: 24px; padding: 32px 24px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px; color: #5E5157">
+<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#E85D75" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M4 7l8 6 8-6"/></svg>
+<span style="font-family: 'Playfair Display', Georgia, serif; font-size: 18px; color: #702D43">Pick an invitation</span>
+<span style="font-size: 14px">Choose Details on any row to see the message, plan and response.</span>
+</div>
+</sc-if>
+</aside>
+</div>
+</div>
+</sc-if>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"showEmpty":{"editor":"boolean","default":false,"section":"Preview"},"$preview":{"width":1440,"height":1180}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { filter: 'all', selected: 'mika', copied: null };
+  }
+  componentWillUnmount() { clearTimeout(this._t); }
+  copy(d) {
+    try { if (navigator.clipboard) navigator.clipboard.writeText('https://' + d.link).catch(function () {}); } catch (e) {}
+    this.setState({ copied: d.id });
+    clearTimeout(this._t);
+    this._t = setTimeout(() => this.setState({ copied: null }), 1800);
+  }
+  renderVals() {
+    const STATUS = {
+      accepted: { label: 'Accepted', bg: '#E4F0E8', fg: '#2E5A43', dot: '#5B8C72' },
+      pending: { label: 'Pending', bg: '#FFF1DB', fg: '#7E5310', dot: '#D9A044' },
+      declined: { label: 'Declined', bg: '#F7E7EB', fg: '#7A3F52', dot: '#C98A9A' },
+      expired: { label: 'Expired', bg: '#EFEBED', fg: '#5E5358', dot: '#A79CA1' }
+    };
+    const THEMES = {
+      blush: { name: 'Blush letter', av: '#FFE1E7', avFg: '#702D43' },
+      lavender: { name: 'Lavender dream', av: '#E9DDF8', avFg: '#47335F' },
+      peach: { name: 'Peach garden', av: '#FFD8C2', avFg: '#6A3A1F' }
+    };
+    const DATA = [
+      { id: 'mika', name: 'Mika Reyes', status: 'accepted', theme: 'blush', sent: 'Feb 8', sentLong: 'Feb 8, 9:15 PM', expires: 'Feb 15', activity: 'Said yes · Feb 9', response: 'Said yes — it’s a date!', responseDetail: 'Feb 9 at 8:42 PM, on the first try', message: 'Every coffee run is better with you. I’d love to spend Valentine’s Day with you — will you be my Valentine?', plan: 'Dinner at Toyo Eatery, Feb 14, 7 PM', link: 'bemyvalentine.app/i/mika-7f3k' },
+      { id: 'andrea', name: 'Andrea Lim', status: 'pending', theme: 'lavender', sent: 'Feb 10', sentLong: 'Feb 10, 6:02 PM', expires: 'Feb 15', activity: 'Opened Feb 11 · no reply yet', response: 'Opened, no reply yet', responseDetail: 'Last opened Feb 11 at 10:20 AM', message: 'You make ordinary Tuesdays feel like weekends. Would you be my Valentine this year?', plan: 'Sunset picnic at Ayala Triangle', link: 'bemyvalentine.app/i/andrea-2m9q' },
+      { id: 'jules', name: 'Jules Navarro', status: 'declined', theme: 'peach', sent: 'Feb 7', sentLong: 'Feb 7, 8:30 PM', expires: 'Feb 15', activity: 'Declined · Feb 8', response: 'Declined, kindly', responseDetail: 'Kept their answer after one “are you sure?” — they received a virtual bouquet', message: 'I’ve been working up the courage to ask: would you be my Valentine?', plan: 'Coffee and a gallery walk', link: 'bemyvalentine.app/i/jules-8d1v' },
+      { id: 'carlo', name: 'Carlo Santos', status: 'accepted', theme: 'blush', sent: 'Feb 6', sentLong: 'Feb 6, 10:48 PM', expires: 'Feb 15', activity: 'Said yes · Feb 6', response: 'Said yes — it’s a date!', responseDetail: 'Feb 6 at 11:03 PM, after replaying the surprise twice', message: 'Ten years of friendship and you still make me laugh the hardest. Valentine’s with me?', plan: 'Pottery class, then ramen', link: 'bemyvalentine.app/i/carlo-4h6s' },
+      { id: 'bea', name: 'Bea Tan', status: 'pending', theme: 'lavender', sent: 'Feb 11', sentLong: 'Feb 11, 7:40 AM', expires: 'Feb 15', activity: 'Not opened yet', response: 'Not opened yet', responseDetail: 'The link hasn’t been opened', message: 'Will you be my Valentine? I promise good snacks.', plan: 'No plan added', link: 'bemyvalentine.app/i/bea-9k2w' },
+      { id: 'ivy', name: 'Ivy Cruz', status: 'expired', theme: 'peach', sent: 'Jan 20', sentLong: 'Jan 20, 5:12 PM', expires: 'Expired Feb 3', activity: 'Link expired Feb 3', response: 'Invitation expired', responseDetail: 'Never opened before the link expired', message: 'Would you be my Valentine? Let’s make it a cozy one.', plan: 'Movie night at home', link: 'bemyvalentine.app/i/ivy-1p5r' }
+    ];
+    const isEmpty = this.props.showEmpty ?? false;
+    const data = isEmpty ? [] : DATA;
+    const count = (s) => data.filter((d) => d.status === s).length;
+    const decorate = (d) => {
+      const s = STATUS[d.status];
+      const t = THEMES[d.theme];
+      return Object.assign({}, d, {
+        initial: d.name.charAt(0), themeName: t.name, avBg: t.av, avFg: t.avFg,
+        pillBg: s.bg, pillFg: s.fg, pillDot: s.dot, pillLabel: s.label,
+        copyLabel: this.state.copied === d.id ? 'Copied!' : 'Copy link',
+        copy: () => this.copy(d),
+        select: () => this.setState({ selected: d.id })
+      });
+    };
+    const f = this.state.filter;
+    const rows = data.filter((d) => f === 'all' || d.status === f).map((d) => {
+      const r = decorate(d);
+      r.rowBg = this.state.selected === d.id ? '#FFF0F3' : '#FFFFFF';
+      return r;
+    });
+    const tabDefs = [['all', 'All', data.length], ['pending', 'Pending', count('pending')], ['accepted', 'Accepted', count('accepted')], ['declined', 'Declined', count('declined')], ['expired', 'Expired', count('expired')]];
+    const tabs = tabDefs.map((t) => {
+      const on = f === t[0];
+      return { label: t[1], count: t[2], pressed: on ? 'true' : 'false', bg: on ? '#702D43' : '#FFFFFF', fg: on ? '#FFFFFF' : '#5E5157', border: on ? '#702D43' : '#EBD5DA', pick: () => this.setState({ filter: t[0] }) };
+    });
+    const found = data.find((d) => d.id === this.state.selected);
+    const sel = found ? decorate(found) : null;
+    if (sel) sel.link = 'https://' + sel.link;
+    return {
+      isEmpty: isEmpty,
+      hasData: !isEmpty,
+      counts: { total: data.length, pending: count('pending'), accepted: count('accepted'), declined: count('declined'), expiredNote: count('expired') + ' expired without a reply' },
+      tabs: tabs,
+      rows: rows,
+      noRows: rows.length === 0,
+      sel: sel || {},
+      hasSel: !!sel,
+      noSel: !sel,
+      closeSel: () => this.setState({ selected: null })
+    };
+  }
+}
+</script>
+</body>
+</html>

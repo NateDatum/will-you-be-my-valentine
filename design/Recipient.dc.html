@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Your Valentine letter</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FFF0F3}
+a{color:#702D43}a:hover{color:#C94462}
+button{font-family:inherit}
+button:focus-visible{outline:3px solid #702D43;outline-offset:3px}
+.btn-yes{transition:background .18s ease, transform .18s ease}
+.btn-yes:hover{background:#B33A56 !important;transform:translateY(-1px)}
+.btn-no{transition:background .18s ease}
+.btn-no:hover{background:#FFF6F8 !important}
+.env{position:relative;width:280px;height:190px;perspective:900px}
+.env-idle{animation:bob 3.2s ease-in-out infinite}
+.env-back{position:absolute;left:0;top:0;right:0;bottom:0;border-radius:16px;background:#F7D3DB;box-shadow:0 18px 40px rgba(112,45,67,.18)}
+.env-letter{position:absolute;left:18px;right:18px;top:14px;height:150px;border-radius:10px;background:#FFFFFF;z-index:2;padding:22px 18px;box-sizing:border-box;display:flex;flex-direction:column;gap:8px}
+.env-pocket{position:absolute;left:0;top:0;right:0;bottom:0;border-radius:16px;background:#FCE3E8;clip-path:polygon(0 38%,50% 72%,100% 38%,100% 100%,0 100%);z-index:3}
+.env-flap{position:absolute;left:0;right:0;top:0;height:62%;background:#F4BFCB;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top center;z-index:4;border-radius:16px 16px 0 0}
+.env-seal{position:absolute;left:50%;top:62%;width:50px;height:50px;margin:-25px 0 0 -25px;border-radius:50%;background:#C94462;z-index:5;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 10px rgba(112,45,67,.25)}
+.opening .env-flap{animation:flapOpen .7s ease forwards}
+.opening .env-seal{animation:fadeOut .25s ease forwards}
+.opening .env-letter{animation:letterRise .7s .45s ease forwards}
+.env-muted .env-back{background:#E6DFE3;box-shadow:none}
+.env-muted .env-pocket{background:#F1ECEF}
+.env-muted .env-flap{background:#DCD3D8}
+.env-muted .env-seal{background:#A79CA1;box-shadow:none}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes flapOpen{0%{transform:rotateX(0);z-index:4}49%{z-index:4}50%{z-index:1}100%{transform:rotateX(180deg);z-index:1}}
+@keyframes letterRise{to{transform:translateY(-92px)}}
+@keyframes fadeOut{to{opacity:0;transform:scale(.6)}}
+@keyframes cardIn{from{opacity:0;transform:translateY(28px) scale(.98)}to{opacity:1;transform:none}}
+.card-in{animation:cardIn .6s cubic-bezier(.2,.8,.2,1) both}
+.fh{position:absolute;bottom:-40px;opacity:0;animation-name:floatUp;animation-timing-function:linear;animation-iteration-count:infinite}
+@keyframes floatUp{0%{transform:translateY(0) rotate(-8deg);opacity:0}12%{opacity:.75}85%{opacity:.45}100%{transform:translateY(-900px) rotate(18deg);opacity:0}}
+.burst-p{position:absolute;left:50%;top:22%;opacity:0;animation:burst 1.7s cubic-bezier(.15,.7,.3,1) forwards}
+@keyframes burst{0%{transform:translate(-50%,-50%) scale(.3);opacity:0}12%{opacity:1}75%{opacity:1}100%{transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) rotate(var(--r)) scale(1);opacity:0}}
+@keyframes popIn{0%{opacity:0;transform:scale(.85)}60%{opacity:1;transform:scale(1.04)}100%{transform:scale(1)}}
+.pop-in{animation:popIn .55s cubic-bezier(.2,.8,.2,1) both}
+@media (prefers-reduced-motion: reduce){.env-idle,.card-in,.pop-in,.burst-p{animation:none !important}.burst-p{display:none}.fh{display:none}.opening .env-flap,.opening .env-letter,.opening .env-seal{animation-duration:.01s !important;animation-delay:0s !important}}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; position: relative; overflow: hidden; background: #FFF0F3; font-family: Inter, system-ui, sans-serif; color: #352B30; font-size: 16px; line-height: 1.55">
+
+<svg width="180" height="180" viewBox="0 0 180 180" aria-hidden="true" style="position: absolute; right: -60px; top: -50px; opacity: 0.6"><circle cx="90" cy="90" r="26" fill="#FFD8C2"/><circle cx="90" cy="46" r="25" fill="#F9CED8"/><circle cx="134" cy="90" r="25" fill="#F9CED8"/><circle cx="90" cy="134" r="25" fill="#F9CED8"/><circle cx="46" cy="90" r="25" fill="#F9CED8"/></svg>
+<svg width="140" height="140" viewBox="0 0 180 180" aria-hidden="true" style="position: absolute; left: -54px; bottom: 40px; opacity: 0.55"><circle cx="90" cy="90" r="26" fill="#FFF0F3"/><circle cx="90" cy="46" r="25" fill="#E9DDF8"/><circle cx="134" cy="90" r="25" fill="#E9DDF8"/><circle cx="90" cy="134" r="25" fill="#E9DDF8"/><circle cx="46" cy="90" r="25" fill="#E9DDF8"/></svg>
+
+<sc-if value="{{showFloat}}" hint-placeholder-val="{{ true }}">
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; pointer-events: none">
+<sc-for list="{{hearts}}" as="h" hint-placeholder-count="9">
+<svg class="fh" viewBox="0 0 24 24" style="{{h.style}}"><path d="M12 20.5C7 16.8 3 13.6 3 9.4 3 6.6 5.1 4.5 7.8 4.5c1.7 0 3.2.9 4.2 2.3 1-1.4 2.5-2.3 4.2-2.3 2.7 0 4.8 2.1 4.8 4.9 0 4.2-4 7.4-9 11.1z" fill="{{h.color}}"/></svg>
+</sc-for>
+</div>
+</sc-if>
+
+<sc-if value="{{isEnvelope}}" hint-placeholder-val="{{ true }}">
+<main style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; padding: 56px 28px 40px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; text-align: center; box-sizing: border-box">
+<div style="display: flex; flex-direction: column; align-items: center; gap: 10px">
+<span style="font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #9A4A60">A letter for you</span>
+<h1 style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 34px; line-height: 1.15; color: #702D43">Mika, you’ve<br>got mail</h1>
+<p style="margin: 0; color: #5E5157; font-size: 15px">Someone sealed this one with a heart.</p>
+</div>
+<div class="env {{envClass}}">
+<div class="env-back"></div>
+<div class="env-letter" aria-hidden="true">
+<span style="font-family: 'Playfair Display', Georgia, serif; font-style: italic; color: #702D43; font-size: 15px; text-align: left">Dear Mika,</span>
+<span style="height: 5px; width: 85%; border-radius: 3px; background: #F4E3E7"></span>
+<span style="height: 5px; width: 70%; border-radius: 3px; background: #F4E3E7"></span>
+<span style="height: 5px; width: 78%; border-radius: 3px; background: #F4E3E7"></span>
+</div>
+<div class="env-pocket"></div>
+<div class="env-flap"></div>
+<div class="env-seal" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M12 20.5C7 16.8 3 13.6 3 9.4 3 6.6 5.1 4.5 7.8 4.5c1.7 0 3.2.9 4.2 2.3 1-1.4 2.5-2.3 4.2-2.3 2.7 0 4.8 2.1 4.8 4.9 0 4.2-4 7.4-9 11.1z" fill="#FFFFFF"/></svg></div>
+</div>
+<div style="width: 100%; display: flex; flex-direction: column; gap: 12px">
+<button type="button" class="btn-yes" onClick="{{open}}" disabled="{{isOpening}}" style="width: 100%; min-height: 56px; border-radius: 16px; border: none; background: #C94462; color: #FFFFFF; font-size: 17px; font-weight: 600; cursor: pointer; box-shadow: 0 8px 20px rgba(201, 68, 98, 0.28)">{{openLabel}}</button>
+<span style="font-size: 14px; color: #6B5F65">From <span style="font-family: 'Playfair Display', Georgia, serif; font-style: italic; color: #702D43">Sam</span></span>
+</div>
+</main>
+</sc-if>
+
+<sc-if value="{{isCard}}" hint-placeholder-val="{{ false }}">
+<main class="card-in" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; padding: 40px 20px 28px; display: flex; flex-direction: column; justify-content: center; box-sizing: border-box">
+<article style="background: #FFFFFF; border-radius: 28px; padding: 30px 24px 24px; box-shadow: 0 16px 44px rgba(112, 45, 67, 0.14); display: flex; flex-direction: column; gap: 16px; position: relative; overflow: hidden">
+<svg width="96" height="96" viewBox="0 0 110 110" aria-hidden="true" style="position: absolute; right: -24px; top: -24px"><circle cx="55" cy="55" r="16" fill="#FFD8C2"/><circle cx="55" cy="28" r="15" fill="#F9CED8"/><circle cx="82" cy="55" r="15" fill="#F9CED8"/><circle cx="55" cy="82" r="15" fill="#F9CED8"/><circle cx="28" cy="55" r="15" fill="#F9CED8"/><circle cx="55" cy="55" r="7" fill="#E85D75"/></svg>
+<span style="font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-size: 21px; color: #702D43">Dear Mika,</span>
+<h1 style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-size: 34px; line-height: 1.12; font-weight: 600; color: #702D43">Will you be my Valentine?</h1>
+<p style="margin: 0; font-size: 16px; line-height: 1.65; color: #4A3D43">Every coffee run is better with you. I’d love to spend Valentine’s Day with you — no pressure, just a lot of hope.</p>
+<span style="align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; padding: 9px 13px; border-radius: 12px; background: #FFE3E9; color: #702D43; font-size: 14px; font-weight: 500">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Dinner at Toyo Eatery · Feb 14, 7 PM</span>
+<span style="font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-size: 18px; color: #702D43">With love, Sam</span>
+<sc-if value="{{canAnswer}}" hint-placeholder-val="{{ true }}">
+<div style="display: flex; flex-direction: column; gap: 12px; margin-top: 6px">
+<button type="button" class="btn-yes" onClick="{{yes}}" style="width: 100%; min-height: 56px; border-radius: 16px; border: none; background: #C94462; color: #FFFFFF; font-size: 17px; font-weight: 600; cursor: pointer; box-shadow: 0 8px 20px rgba(201, 68, 98, 0.25)">Yes, I’d love to! 💗</button>
+<button type="button" class="btn-no" onClick="{{no}}" style="width: 100%; min-height: 56px; border-radius: 16px; border: 1.5px solid #702D43; background: #FFFFFF; color: #702D43; font-size: 17px; font-weight: 600; cursor: pointer">No, thank you</button>
+</div>
+</sc-if>
+<sc-if value="{{isLetterAgain}}" hint-placeholder-val="{{ false }}">
+<div style="display: flex; flex-direction: column; gap: 12px; margin-top: 6px">
+<span style="align-self: center; display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; background: #E4F0E8; color: #2E5A43; font-size: 14px; font-weight: 600">
+<svg width="15" height="15" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5C7 16.8 3 13.6 3 9.4 3 6.6 5.1 4.5 7.8 4.5c1.7 0 3.2.9 4.2 2.3 1-1.4 2.5-2.3 4.2-2.3 2.7 0 4.8 2.1 4.8 4.9 0 4.2-4 7.4-9 11.1z" fill="#5B8C72"/></svg>You said yes</span>
+<button type="button" class="btn-no" onClick="{{backToSurprise}}" style="width: 100%; min-height: 52px; border-radius: 16px; border: 1.5px solid #702D43; background: #FFFFFF; color: #702D43; font-size: 16px; font-weight: 600; cursor: pointer">Back to the surprise</button>
+</div>
+</sc-if>
+</article>
+</main>
+</sc-if>
+
+<sc-if value="{{isAccepted}}" hint-placeholder-val="{{ false }}">
+<main style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; padding: 48px 24px 32px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 18px; box-sizing: border-box">
+<sc-if value="{{burst}}" hint-placeholder-val="{{ false }}">
+<div aria-hidden="true" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; pointer-events: none; z-index: 3">
+<sc-for list="{{pieces}}" as="p" hint-placeholder-count="0">
+<svg class="burst-p" viewBox="0 0 24 24" style="{{p.style}}"><path d="M12 20.5C7 16.8 3 13.6 3 9.4 3 6.6 5.1 4.5 7.8 4.5c1.7 0 3.2.9 4.2 2.3 1-1.4 2.5-2.3 4.2-2.3 2.7 0 4.8 2.1 4.8 4.9 0 4.2-4 7.4-9 11.1z" fill="{{p.color}}"/></svg>
+</sc-for>
+</div>
+</sc-if>
+<div class="pop-in" style="display: flex; flex-direction: column; align-items: center; gap: 8px">
+<svg width="128" height="144" viewBox="0 0 160 180" aria-hidden="true"><path d="M80 150L60 77M80 150L80 65M80 150L100 77M80 150L42 97M80 150L118 99" stroke="#5B8C72" stroke-width="3" fill="none" stroke-linecap="round"/><ellipse cx="66" cy="112" rx="5" ry="12" transform="rotate(-35 66 112)" fill="#8DB59D"/><ellipse cx="95" cy="112" rx="5" ry="12" transform="rotate(35 95 112)" fill="#8DB59D"/><path d="M68 58C68 42 74 36 74 36L80 46L86 36C86 36 92 42 92 58C92 68 68 68 68 58Z" fill="#E85D75"/><path d="M48 70C48 54 54 48 54 48L60 58L66 48C66 48 72 54 72 70C72 80 48 80 48 70Z" fill="#F4A3B4"/><path d="M88 70C88 54 94 48 94 48L100 58L106 48C106 48 112 54 112 70C112 80 88 80 88 70Z" fill="#F4A3B4"/><path d="M32 90C32 77 37 72 37 72L42 80L47 72C47 72 52 77 52 90C52 98 32 98 32 90Z" fill="#C9B3E6"/><path d="M108 92C108 79 113 74 113 74L118 82L123 74C123 74 128 79 128 92C128 100 108 100 108 92Z" fill="#FFC4A6"/><path d="M40 112L80 172L120 112Z" fill="#FFF9F2" stroke="#702D43" stroke-width="2" stroke-linejoin="round"/><path d="M80 128C68 118 62 134 80 131C98 134 92 118 80 128Z" fill="#E85D75"/><path d="M80 130L72 146M80 130L88 146" stroke="#E85D75" stroke-width="2.5" stroke-linecap="round"/></svg>
+<h1 style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 700; font-size: 36px; line-height: 1.12; color: #702D43">Yay! It’s a date! 💕</h1>
+<p style="margin: 0; color: #5E5157; font-size: 16px">Sam is going to be over the moon. Here’s what’s planned:</p>
+</div>
+<section aria-label="Your date plan" style="width: 100%; box-sizing: border-box; background: #FFFFFF; border-radius: 22px; padding: 20px; box-shadow: 0 12px 32px rgba(112, 45, 67, 0.10); display: flex; flex-direction: column; gap: 14px; text-align: left; position: relative; z-index: 2">
+<div style="display: flex; align-items: center; gap: 14px">
+<span style="flex: none; width: 58px; height: 62px; border-radius: 14px; background: #FFD8C2; color: #6A3226; display: flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.1">
+<span style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em">FEB</span>
+<span style="font-family: 'Playfair Display', Georgia, serif; font-size: 26px; font-weight: 700">14</span>
+</span>
+<div style="display: flex; flex-direction: column">
+<span style="font-family: 'Playfair Display', Georgia, serif; font-size: 20px; font-weight: 600; color: #702D43">Dinner at Toyo Eatery</span>
+<span style="font-size: 14px; color: #5E5157">Saturday · 7:00 PM</span>
+</div>
+</div>
+<div style="border-top: 1.5px dashed #F1D9DF; padding-top: 12px; font-size: 14px; color: #4A3D43">Sam will pick you up at 6:30. Dress cozy — it might be chilly.</div>
+</section>
+<div style="display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: #2E5A43; font-weight: 500">
+<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+Your answer was sent to Sam</div>
+<div style="width: 100%; display: flex; flex-direction: column; gap: 10px; margin-top: auto">
+<button type="button" class="btn-yes" onClick="{{replay}}" style="width: 100%; min-height: 52px; border-radius: 16px; border: none; background: #C94462; color: #FFFFFF; font-size: 16px; font-weight: 600; cursor: pointer">Replay the surprise</button>
+<button type="button" class="btn-no" onClick="{{readAgain}}" style="width: 100%; min-height: 52px; border-radius: 16px; border: 1.5px solid #702D43; background: #FFFFFF; color: #702D43; font-size: 16px; font-weight: 600; cursor: pointer">Read the letter again</button>
+</div>
+</main>
+</sc-if>
+
+<sc-if value="{{isDecline1}}" hint-placeholder-val="{{ false }}">
+<main class="card-in" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; padding: 40px 20px 28px; display: flex; flex-direction: column; justify-content: center; box-sizing: border-box">
+<section style="background: #FFFFFF; border-radius: 28px; padding: 32px 24px 24px; box-shadow: 0 16px 44px rgba(112, 45, 67, 0.14); display: flex; flex-direction: column; align-items: center; text-align: center; gap: 14px">
+<svg width="96" height="88" viewBox="0 0 96 88" aria-hidden="true"><path d="M48 82C26 66 6 52 6 32 6 18 16 8 29 8c8 0 15 4 19 11 4-7 11-11 19-11 13 0 23 10 23 24 0 20-20 34-42 50z" fill="#F9CED8"/><circle cx="35" cy="38" r="4" fill="#702D43"/><circle cx="61" cy="38" r="4" fill="#702D43"/><path d="M38 54c4-3 16-3 20 0" stroke="#702D43" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M66 46c0 4-3 6-3 6s-3-2-3-6c0-2 3-6 3-6s3 4 3 6z" fill="#9FC3E8"/></svg>
+<h1 style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 30px; line-height: 1.18; color: #702D43">Aww, okay! 🥹<br>Are you absolutely sure?</h1>
+<p style="margin: 0; color: #5E5157">No pressure at all — just making sure your thumb didn’t slip.</p>
+<div style="width: 100%; display: flex; flex-direction: column; gap: 12px; margin-top: 8px">
+<button type="button" class="btn-yes" onClick="{{reconsider}}" style="width: 100%; min-height: 56px; border-radius: 16px; border: none; background: #C94462; color: #FFFFFF; font-size: 17px; font-weight: 600; cursor: pointer">Let me reconsider</button>
+<button type="button" class="btn-no" onClick="{{keepNo}}" style="width: 100%; min-height: 56px; border-radius: 16px; border: 1.5px solid #702D43; background: #FFFFFF; color: #702D43; font-size: 17px; font-weight: 600; cursor: pointer">Yes, I’m sure</button>
+</div>
+</section>
+</main>
+</sc-if>
+
+<sc-if value="{{isDecline2}}" hint-placeholder-val="{{ false }}">
+<main class="card-in" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; padding: 56px 24px 32px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px; box-sizing: border-box">
+<svg width="172" height="194" viewBox="0 0 160 180" aria-hidden="true"><path d="M80 150L60 77M80 150L80 65M80 150L100 77M80 150L42 97M80 150L118 99" stroke="#5B8C72" stroke-width="3" fill="none" stroke-linecap="round"/><ellipse cx="66" cy="112" rx="5" ry="12" transform="rotate(-35 66 112)" fill="#8DB59D"/><ellipse cx="95" cy="112" rx="5" ry="12" transform="rotate(35 95 112)" fill="#8DB59D"/><path d="M68 58C68 42 74 36 74 36L80 46L86 36C86 36 92 42 92 58C92 68 68 68 68 58Z" fill="#FFC4A6"/><path d="M48 70C48 54 54 48 54 48L60 58L66 48C66 48 72 54 72 70C72 80 48 80 48 70Z" fill="#C9B3E6"/><path d="M88 70C88 54 94 48 94 48L100 58L106 48C106 48 112 54 112 70C112 80 88 80 88 70Z" fill="#F4A3B4"/><path d="M32 90C32 77 37 72 37 72L42 80L47 72C47 72 52 77 52 90C52 98 32 98 32 90Z" fill="#F4A3B4"/><path d="M108 92C108 79 113 74 113 74L118 82L123 74C123 74 128 79 128 92C128 100 108 100 108 92Z" fill="#C9B3E6"/><path d="M40 112L80 172L120 112Z" fill="#E9DDF8" stroke="#702D43" stroke-width="2" stroke-linejoin="round"/><path d="M80 128C68 118 62 134 80 131C98 134 92 118 80 128Z" fill="#FFD8C2" stroke="#702D43" stroke-width="1.5"/></svg>
+<h1 style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 31px; line-height: 1.18; color: #702D43">Two Nos?<br>Message received! 💌</h1>
+<p style="margin: 0; color: #4A3D43; font-size: 16px; max-width: 320px">Your answer is respected. Here’s a little virtual bouquet to brighten your day anyway. 🌷</p>
+<button type="button" class="btn-yes" onClick="{{takeCare}}" style="margin-top: auto; width: 100%; min-height: 56px; border-radius: 16px; border: none; background: #C94462; color: #FFFFFF; font-size: 17px; font-weight: 600; cursor: pointer">Take care! 💐</button>
+</main>
+</sc-if>
+
+<sc-if value="{{isDone}}" hint-placeholder-val="{{ false }}">
+<main class="card-in" style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; padding: 40px 32px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 14px; box-sizing: border-box">
+<span style="width: 72px; height: 72px; border-radius: 50%; background: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(112, 45, 67, 0.10)"><svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20.5C7 16.8 3 13.6 3 9.4 3 6.6 5.1 4.5 7.8 4.5c1.7 0 3.2.9 4.2 2.3 1-1.4 2.5-2.3 4.2-2.3 2.7 0 4.8 2.1 4.8 4.9 0 4.2-4 7.4-9 11.1z" fill="#E85D75"/></svg></span>
+<h1 style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 28px; color: #702D43">Take care, Mika</h1>
+<p style="margin: 0; color: #5E5157">Your reply has been sent to Sam. Thanks for being honest — and kind about it.</p>
+</main>
+</sc-if>
+
+<sc-if value="{{isExpired}}" hint-placeholder-val="{{ false }}">
+<main style="position: absolute; left: 0; top: 0; right: 0; bottom: 0; padding: 56px 28px 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 28px; box-sizing: border-box">
+<div class="env env-muted" aria-hidden="true">
+<div class="env-back"></div>
+<div class="env-pocket"></div>
+<div class="env-flap"></div>
+<div class="env-seal"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l2.5 1.5"/></svg></div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 10px; align-items: center">
+<span style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 999px; background: #EFEBED; color: #5E5358; font-size: 13px; font-weight: 600">Invitation expired</span>
+<h1 style="margin: 0; font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: 30px; line-height: 1.2; color: #702D43">This letter has<br>passed its date</h1>
+<p style="margin: 0; color: #5E5157; max-width: 300px">The link Sam sent is no longer active. If you’d still like to reply, the sweetest way is to tell them directly.</p>
+</div>
+</main>
+</sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"startAt":{"editor":"enum","options":["envelope","card","accepted","declinedOnce","declinedTwice","expired"],"default":"envelope","section":"Flow"},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { screen: null, declines: 0, burst: true };
+  }
+  componentDidUpdate(prev) {
+    if (prev.startAt !== this.props.startAt) {
+      clearTimeout(this._t);
+      this.setState({ screen: null, declines: 0, burst: true });
+    }
+  }
+  componentWillUnmount() { clearTimeout(this._t); clearTimeout(this._r); }
+  renderVals() {
+    const MAP = { envelope: 'envelope', card: 'card', accepted: 'accepted', declinedOnce: 'decline1', declinedTwice: 'decline2', expired: 'expired' };
+    const screen = this.state.screen || MAP[this.props.startAt ?? 'envelope'] || 'envelope';
+    const heartColors = ['#E85D75', '#F4A3B4', '#C9B3E6', '#FFC4A6', '#F9CED8'];
+    const hearts = [
+      [6, 16, 13, -2], [18, 11, 16, -9], [30, 20, 14, -5], [44, 12, 18, -12], [57, 15, 15, -1],
+      [68, 22, 17, -7], [80, 12, 14, -11], [90, 17, 19, -4], [50, 10, 21, -15]
+    ].map((h, i) => ({
+      color: heartColors[i % heartColors.length],
+      style: 'left:' + h[0] + '%;width:' + h[1] + 'px;height:' + h[1] + 'px;animation-duration:' + h[2] + 's;animation-delay:' + h[3] + 's'
+    }));
+    const pieces = [];
+    const n = 24;
+    for (let i = 0; i < n; i++) {
+      const a = (i / n) * Math.PI * 2 + (i % 3) * 0.12;
+      const d = 120 + (i % 5) * 22;
+      const dx = Math.round(Math.cos(a) * d);
+      const dy = Math.round(Math.sin(a) * d * 0.9 + 60);
+      const size = 12 + (i % 4) * 4;
+      pieces.push({
+        color: heartColors[i % heartColors.length],
+        style: 'width:' + size + 'px;height:' + size + 'px;--dx:' + dx + 'px;--dy:' + dy + 'px;--r:' + ((i % 2 ? 1 : -1) * (20 + i * 7)) + 'deg;animation-delay:' + ((i % 6) * 0.04).toFixed(2) + 's'
+      });
+    }
+    const go = (s, extra) => this.setState(Object.assign({ screen: s }, extra || {}));
+    return {
+      hearts: hearts,
+      pieces: pieces,
+      showFloat: screen !== 'expired' && screen !== 'done',
+      isEnvelope: screen === 'envelope' || screen === 'opening',
+      isOpening: screen === 'opening',
+      envClass: screen === 'opening' ? 'opening' : 'env-idle',
+      openLabel: screen === 'opening' ? 'Opening…' : 'Open your letter',
+      isCard: screen === 'card' || screen === 'letterAgain',
+      canAnswer: screen === 'card',
+      isLetterAgain: screen === 'letterAgain',
+      isAccepted: screen === 'accepted',
+      isDecline1: screen === 'decline1',
+      isDecline2: screen === 'decline2',
+      isDone: screen === 'done',
+      isExpired: screen === 'expired',
+      burst: this.state.burst,
+      open: () => {
+        if (screen === 'opening') return;
+        go('opening');
+        clearTimeout(this._t);
+        this._t = setTimeout(() => this.setState({ screen: 'card' }), 1250);
+      },
+      yes: () => go('accepted', { burst: true }),
+      no: () => {
+        if (this.state.declines >= 1) go('decline2', { declines: 2 });
+        else go('decline1', { declines: 1 });
+      },
+      reconsider: () => go('card'),
+      keepNo: () => go('decline2', { declines: 2 }),
+      takeCare: () => go('done'),
+      readAgain: () => go('letterAgain'),
+      backToSurprise: () => go('accepted', { burst: false }),
+      replay: () => {
+        this.setState({ burst: false });
+        clearTimeout(this._r);
+        this._r = setTimeout(() => this.setState({ burst: true }), 40);
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>
