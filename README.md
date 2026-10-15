@@ -2,7 +2,7 @@
 
 Write a Valentine, share a link, find out the answer — kindly.
 
-**Live:** _added after first production deploy_
+**Live:** https://will-you-be-my-valentine-rho-seven.vercel.app
 
 ## Architecture
 
