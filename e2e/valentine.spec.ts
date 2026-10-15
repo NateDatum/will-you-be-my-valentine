@@ -61,7 +61,8 @@ test('sender creates invites; recipient declines one and accepts another', async
   const acceptLink = await createInvite(page, 'Mika')
   await page.goto(`${acceptLink}?preview=1`)
   await expect(page.getByText('Preview — your answer won’t be sent')).toBeVisible()
-  await page.goto('/dashboard')
+  await page.getByRole('link', { name: 'Back to dashboard' }).click()
+  await expect(page).toHaveURL(/\/dashboard$/)
   await expect(page.locator('.row', { hasText: 'Mika' })).toContainText('Not opened yet')
 
   await recipient.goto(acceptLink)

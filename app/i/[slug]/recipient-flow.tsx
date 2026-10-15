@@ -1,8 +1,9 @@
 'use client'
+import Link from 'next/link'
 import { useEffect, useReducer, useRef, useState } from 'react'
 import { THEMES, type PublicInvite } from '@/lib/invite'
 import { initialFlow, step, type FlowEvent, type FlowState } from '@/lib/recipient-flow'
-import { Bouquet, CalendarIcon, CheckIcon, ClockIcon, FlowerDecor, HeartIcon } from '@/components/icons'
+import { ArrowLeftIcon, Bouquet, CalendarIcon, CheckIcon, ClockIcon, FlowerDecor, HeartIcon } from '@/components/icons'
 
 const COLORS = ['#E85D75', '#F4A3B4', '#C9B3E6', '#FFC4A6', '#F9CED8']
 // Same values as design/Recipient.dc.html lines 219-238
@@ -79,9 +80,15 @@ export function RecipientFlow({ invite, slug, preview, expired, canChange }: Pro
         )}
 
         {preview && (
-          <span className="absolute left-1/2 top-3 z-20 -translate-x-1/2 whitespace-nowrap rounded-full bg-lavender px-3 py-1 text-[13px] font-medium text-[#47335F]">
-            Preview — your answer won’t be sent
-          </span>
+          <div className="absolute inset-x-0 top-0 z-20 flex items-center justify-between gap-2 px-3 pt-3">
+            <Link href="/dashboard" aria-label="Back to dashboard"
+              className="inline-flex min-h-10 items-center gap-1 rounded-full bg-white px-3 text-sm font-semibold text-wine no-underline shadow-[0_4px_12px_rgba(112,45,67,0.12)]">
+              <ArrowLeftIcon size={16} />Back
+            </Link>
+            <span className="whitespace-nowrap rounded-full bg-lavender px-3 py-1 text-[13px] font-medium text-[#47335F]">
+              Preview — your answer won’t be sent
+            </span>
+          </div>
         )}
 
         {(s === 'envelope' || s === 'opening') && (
