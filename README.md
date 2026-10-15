@@ -4,6 +4,8 @@ Write a Valentine, share a link, find out the answer — kindly.
 
 **Live:** https://will-you-be-my-valentine-rho-seven.vercel.app
 
+Every push to `main` deploys to production automatically; pull requests get their own preview URL.
+
 ## Architecture
 
 ```
