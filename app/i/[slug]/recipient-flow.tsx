@@ -50,6 +50,7 @@ export function RecipientFlow({ invite, slug, preview, expired, canChange }: Pro
   function dispatch(type: FlowEvent['type']) {
     const r = step(state, { type })
     setState(r.state)
+    if (type === 'changeAnswer') setFailed(null) // never re-send an answer they've moved away from
     if (r.post) send(r.post)
     if (type === 'open') setTimeout(() => setState((s) => step(s, { type: 'opened' }).state), 1250)
   }
@@ -162,7 +163,7 @@ export function RecipientFlow({ invite, slug, preview, expired, canChange }: Pro
                 <span className="font-display text-xl font-semibold" style={{ color: th.ink }}>{plan}</span>
               </section>
             )}
-            {!preview && (
+            {!preview && !failed && (
               <div className="inline-flex items-center gap-2 text-sm font-medium text-[#2E5A43]">
                 <CheckIcon size={16} />Your answer was sent to {from ?? 'them'}
               </div>
@@ -231,12 +232,14 @@ export function RecipientFlow({ invite, slug, preview, expired, canChange }: Pro
           </main>
         )}
 
-        {failed && (
-          <button type="button" role="alert" onClick={retry}
-            className="fixed bottom-4 left-1/2 z-30 min-h-12 -translate-x-1/2 cursor-pointer whitespace-nowrap rounded-full border-none bg-wine px-5 font-semibold text-white shadow-[0_8px_20px_rgba(112,45,67,0.3)]">
-            Couldn’t send — tap to try again
-          </button>
-        )}
+        <div role="alert" className="fixed bottom-4 left-1/2 z-30 -translate-x-1/2">
+          {failed && (
+            <button type="button" onClick={retry}
+              className="min-h-12 cursor-pointer whitespace-nowrap rounded-full border-none bg-wine px-5 font-semibold text-white shadow-[0_8px_20px_rgba(112,45,67,0.3)]">
+              Couldn’t send — tap to try again
+            </button>
+          )}
+        </div>
       </div>
     </div>
   )

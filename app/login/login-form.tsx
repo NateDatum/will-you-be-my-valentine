@@ -6,10 +6,11 @@ import { signIn, signUp, type AuthState } from './actions'
 function AuthForm({ mode, onToggle }: { mode: 'in' | 'up'; onToggle: () => void }) {
   const [state, action, pending] = useActionState<AuthState, FormData>(mode === 'in' ? signIn : signUp, {})
   const err = (f: AuthState['field']) => (state.field === f ? state.error : undefined)
+  // React resets uncontrolled fields after an action; keep the email so a typo'd password doesn't wipe it.
   const input = (name: 'name' | 'email' | 'password', label: string, type: string, autoComplete: string) => (
     <div className="flex flex-col gap-2">
       <label htmlFor={`f-${name}`} className="font-semibold">{label}</label>
-      <input id={`f-${name}`} name={name} type={type} autoComplete={autoComplete} required
+      <input id={`f-${name}`} name={name} type={type} autoComplete={autoComplete} required defaultValue={name === 'email' ? state.email : undefined}
         aria-invalid={!!err(name)} aria-describedby={err(name) ? `f-${name}-err` : undefined}
         className={`min-h-12 rounded-[14px] border-[1.5px] bg-field px-3.5 text-base text-ink ${err(name) ? 'border-error' : 'border-line-2'}`} />
       {err(name) && <span id={`f-${name}-err`} className="text-[13px] text-error">{err(name)}</span>}

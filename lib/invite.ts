@@ -20,11 +20,14 @@ export type InviteRow = {
 }
 export type PublicInvite = Pick<InviteRow, 'recipient_name' | 'message' | 'date_plan' | 'signed_as' | 'theme' | 'status' | 'expires_at'>
 
-const optional = (max: number) => z.string().trim().max(max).optional().transform((v) => v || null)
+// Browsers submit textarea line breaks as CRLF; count each break as one character, like the on-screen counter.
+const text = (max: number, msg?: string) =>
+  z.string().transform((s) => s.replace(/\r\n?/g, '\n')).pipe(z.string().trim().max(max, msg))
+const optional = (max: number) => text(max).optional().transform((v) => v || null)
 
 export const inviteInput = z.object({
   recipientName: z.string().trim().min(1, 'Add their name so the card can greet them.').max(40),
-  message: z.string().trim().max(280).default(''),
+  message: text(280, 'Keep your message to 280 characters.').default(''),
   datePlan: optional(120),
   signedAs: optional(40),
   theme: z.enum(['blush', 'lavender', 'peach']),

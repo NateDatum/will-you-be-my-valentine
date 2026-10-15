@@ -38,6 +38,12 @@ describe('inviteInput', () => {
     expect(inviteInput.safeParse({ recipientName: 'A', message: '💗'.repeat(140), theme: 'blush' }).success).toBe(true)
     expect(inviteInput.safeParse({ recipientName: 'A', message: 'x'.repeat(281), theme: 'blush' }).success).toBe(false)
   })
+  it('counts textarea CRLF line breaks as one character', () => {
+    const message = ['a'.repeat(92), 'b'.repeat(92), 'c'.repeat(92)].join('\r\n') + '\r\nd' // 280 chars once normalised
+    const r = inviteInput.safeParse({ recipientName: 'A', message, theme: 'blush' })
+    expect(r.success).toBe(true)
+    expect(r.data?.message).not.toContain('\r')
+  })
   it('rejects an unknown theme and a 41-char name', () => {
     expect(inviteInput.safeParse({ recipientName: 'A', message: '', theme: 'neon' }).success).toBe(false)
     expect(inviteInput.safeParse({ recipientName: 'x'.repeat(41), message: '', theme: 'blush' }).success).toBe(false)

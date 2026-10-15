@@ -29,7 +29,8 @@ export function CreateForm({ siteUrl }: { siteUrl: string }) {
   const messageDisplay = message.trim() || 'Your message will appear here.'
   const signoff = sender.trim() ? `With love, ${sender.trim()}` : 'With love, your secret admirer'
   const link = done ? `${siteUrl}/i/${done}` : ''
-  const error = nameError ? 'Add their name so the card can greet them.' : state.error
+  const error = nameError ? 'Add their name so the card can greet them.' : state.field === 'recipientName' ? state.error : undefined
+  const formError = state.field !== 'recipientName' ? state.error : undefined
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => { if (!name) { e.preventDefault(); setNameError(true) } }
   const copy = async () => {
@@ -113,6 +114,7 @@ export function CreateForm({ siteUrl }: { siteUrl: string }) {
                 </div>
               </fieldset>
 
+              {formError && <p role="alert" className="m-0 text-[13px] text-error">{formError}</p>}
               <button type="submit" disabled={pending}
                 className="btn-primary inline-flex min-h-14 cursor-pointer items-center justify-center gap-2.5 rounded-2xl border-none bg-rose-deep text-[17px] font-semibold text-white shadow-[0_8px_20px_rgba(201,68,98,0.25)]">
                 <SendIcon size={20} />{pending ? 'Sealing…' : 'Create Invitation'}

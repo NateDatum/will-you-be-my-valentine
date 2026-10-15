@@ -3,7 +3,7 @@ import { redirect } from 'next/navigation'
 import { z } from 'zod'
 import { createClient } from '@/lib/supabase/server'
 
-export type AuthState = { error?: string; field?: 'name' | 'email' | 'password' }
+export type AuthState = { error?: string; field?: 'name' | 'email' | 'password'; email?: string }
 
 const creds = z.object({
   email: z.string().trim().pipe(z.email('Enter a valid email.')),
@@ -11,24 +11,25 @@ const creds = z.object({
 })
 const signUpInput = creds.extend({ name: z.string().trim().min(1, 'Tell us your name.').max(40) })
 
-const firstIssue = (e: z.ZodError): AuthState => ({ error: e.issues[0].message, field: e.issues[0].path[0] as AuthState['field'] })
+const firstIssue = (e: z.ZodError, email: unknown): AuthState =>
+  ({ error: e.issues[0].message, field: e.issues[0].path[0] as AuthState['field'], email: String(email ?? '') })
 
 export async function signIn(_: AuthState, fd: FormData): Promise<AuthState> {
   const parsed = creds.safeParse(Object.fromEntries(fd))
-  if (!parsed.success) return firstIssue(parsed.error)
+  if (!parsed.success) return firstIssue(parsed.error, fd.get('email'))
   const supabase = await createClient()
   const { error } = await supabase.auth.signInWithPassword(parsed.data)
-  if (error) return { error: 'That email and password don’t match.', field: 'password' }
+  if (error) return { error: 'That email and password don’t match.', field: 'password', email: parsed.data.email }
   redirect('/dashboard')
 }
 
 export async function signUp(_: AuthState, fd: FormData): Promise<AuthState> {
   const parsed = signUpInput.safeParse(Object.fromEntries(fd))
-  if (!parsed.success) return firstIssue(parsed.error)
+  if (!parsed.success) return firstIssue(parsed.error, fd.get('email'))
   const { name, email, password } = parsed.data
   const supabase = await createClient()
   const { error } = await supabase.auth.signUp({ email, password, options: { data: { display_name: name } } })
-  if (error) return { error: error.message, field: 'email' }
+  if (error) return { error: error.message, field: 'email', email }
   redirect('/dashboard')
 }
 

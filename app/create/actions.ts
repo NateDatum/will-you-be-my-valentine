@@ -3,11 +3,14 @@ import { nanoid } from 'nanoid'
 import { createClient } from '@/lib/supabase/server'
 import { expiresAtFor, inviteInput } from '@/lib/invite'
 
-export type CreateState = { slug?: string; error?: string }
+export type CreateState = { slug?: string; error?: string; field?: string }
 
 export async function createInvite(_: CreateState, fd: FormData): Promise<CreateState> {
   const parsed = inviteInput.safeParse(Object.fromEntries(fd))
-  if (!parsed.success) return { error: parsed.error.issues[0].message }
+  if (!parsed.success) {
+    const issue = parsed.error.issues[0]
+    return { error: issue.message, field: String(issue.path[0]) }
+  }
   const { recipientName, message, datePlan, signedAs, theme } = parsed.data
   const slug = nanoid(21)
   const supabase = await createClient()
